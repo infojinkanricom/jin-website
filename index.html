@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>JIN株式会社｜不動産管理・お家の修理・草刈り・除雪・相続・資産運用のご相談</title>
+<meta name="description" content="JIN株式会社は、不動産管理、お家の修理、草刈り・除草、除雪、相続、資産運用のご相談をひとつの窓口でお受けします。ご相談・お見積もり無料。強引な営業はいたしません。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   JIN株式会社　基本設定（色・文字・角丸など）
+   白基調のミニマルデザイン × 問い合わせしやすさを最優先にした構成
+   （文字サイズ・ボタンの大きさ・コントラストはご年配の方にも配慮）
+   ========================================================= */
+:root {
+  --white: #ffffff;
+  --tile: #f5f5f7;
+  --tile-hover: #ececef;
+  --field: #f2f2f4;
+  --ink: #1d1d1f;
+  --ink-2: #3d3d42;
+  --ink-3: #6e6e73;
+  --hair: rgba(0,0,0,.08);
+  --accent: #8a6a46;
+  --accent-soft: #f4eee6;
+  --ok: #2f6f4f;
+  --error: #b42318;
+  --r-sm: 14px; --r-md: 20px; --r-lg: 28px;
+  --max: 1200px;
+  --ease: cubic-bezier(.22,.8,.24,1);
+  --en: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --header: 72px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header) + 16px); -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--en), "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  font-feature-settings: "palt" 1; color: var(--ink); background: var(--white);
+  font-size: 18px; line-height: 1.85; letter-spacing: .02em; -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+[hidden] { display: none !important; }
+svg { display: block; }
+button { font: inherit; color: inherit; }
+::selection { background: var(--ink); color: #fff; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 40px; }
+.section { padding: 128px 0; }
+.label { display: block; font-family: var(--en); font-size: 14px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+.title { font-weight: 700; font-size: clamp(30px, 4vw, 48px); line-height: 1.32; letter-spacing: -.01em; }
+.sub { font-size: clamp(17px, 1.5vw, 20px); color: var(--ink-2); line-height: 1.9; margin-top: 18px; max-width: 40em; }
+.center { text-align: center; }
+.center .sub { margin-left: auto; margin-right: auto; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  min-height: 60px; padding: 0 30px; border-radius: 999px; border: none; cursor: pointer;
+  font-size: 17px; font-weight: 700; letter-spacing: .04em; background: var(--ink); color: #fff;
+  transition: transform .3s var(--ease), background .3s;
+}
+.btn:hover { background: #000; transform: translateY(-1px); }
+.btn--soft { background: var(--tile); color: var(--ink); }
+.btn--soft:hover { background: var(--tile-hover); }
+.chev { width: 8px; height: 8px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg); flex-shrink: 0; }
+
+/* =========================================================
+   ヘッダー
+   ========================================================= */
+.header { position: fixed; inset: 0 0 auto; z-index: 100; height: var(--header); background: rgba(255,255,255,.82); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); transition: box-shadow .3s; }
+.header.is-scrolled { box-shadow: 0 1px 0 var(--hair); }
+.header .container { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+
+/* ---- ロゴエリア ----------------------------------------
+   ロゴ画像ができたら <span class="logo-text">…</span> を
+   <img src="images/logo.svg" alt="JIN株式会社" class="logo-img"> に置き換えるだけでOK。
+   --------------------------------------------------------- */
+.logo { display: inline-flex; align-items: center; height: 40px; flex-shrink: 0; }
+.logo-img { height: 100%; width: auto; }
+.logo-text { display: inline-flex; align-items: baseline; gap: 10px; }
+.logo-text .mark { font-family: var(--en); font-size: 26px; font-weight: 700; letter-spacing: .18em; line-height: 1; }
+.logo-text .name { font-size: 13px; font-weight: 500; letter-spacing: .16em; color: var(--ink-2); }
+
+.head-right { display: flex; align-items: center; gap: 28px; }
+.head-hours { font-size: 14px; color: var(--ink-2); line-height: 1.4; text-align: right; }
+.head-hours b { display: block; font-size: 15px; color: var(--ink); }
+.head-cta { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 16px; font-weight: 700; }
+.head-cta svg { width: 20px; height: 20px; }
+.head-cta:hover { background: #000; }
+
+/* =========================================================
+   ファーストビュー：見出し ＋ 6つのサービス（スクロールなしで見える）
+   ========================================================= */
+.hero { padding: calc(var(--header) + 40px) 0 72px; position: relative; overflow: hidden; isolation: isolate; }
+.hero::before { content: ""; position: absolute; inset: 0 0 auto; height: 420px; z-index: -1; background: linear-gradient(180deg, #f7f6f3 0%, rgba(255,255,255,0) 100%); }
+.hero-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 48px; margin-bottom: 28px; }
+.hero h1 { font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; line-height: 1.3; letter-spacing: -.01em; }
+.hero h1 small { display: block; font-size: clamp(15px, 1.3vw, 17px); font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-bottom: 10px; }
+.hero-lead { font-size: 17px; color: var(--ink-2); line-height: 1.8; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.chips li { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--white); box-shadow: inset 0 0 0 1px var(--hair); font-size: 15px; font-weight: 600; }
+.chips svg { width: 18px; height: 18px; color: var(--ok); }
+
+/* サービスタイル（画像＋大きな文字） */
+.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.svc-card {
+  position: relative; display: flex; flex-direction: column; background: var(--white); border-radius: var(--r-lg);
+  box-shadow: 0 0 0 1px var(--hair), 0 10px 30px rgba(0,0,0,.05); overflow: hidden;
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+.svc-card:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px rgba(0,0,0,.12), 0 18px 40px rgba(0,0,0,.10); }
+.svc-card:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.svc-img { position: relative; height: 150px; overflow: hidden; background: var(--tile); }
+/* 写真に差し替える場合：該当タイルの .svc-img に style="background-image:url(images/xxx.jpg)" を指定し、中の <svg> を削除してください */
+.svc-img { background-size: cover; background-position: center; }
+.svc-img svg { width: 100%; height: 100%; transition: transform .8s var(--ease); }
+.svc-card:hover .svc-img svg { transform: scale(1.05); }
+.svc-img .tag { position: absolute; left: 14px; top: 14px; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.9); font-family: var(--en); font-size: 13px; font-weight: 600; letter-spacing: .08em; color: var(--ink); }
+.svc-body { display: flex; align-items: center; gap: 14px; padding: 18px 22px 20px; }
+.svc-body .txt { flex: 1; min-width: 0; }
+.svc-card h2 { font-size: 22px; font-weight: 700; line-height: 1.35; }
+.svc-card .meta { font-size: 15px; color: var(--ink-2); line-height: 1.6; margin-top: 2px; }
+.svc-go { flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; transition: transform .3s var(--ease); }
+.svc-go .chev { margin-right: 3px; }
+.svc-card:hover .svc-go { transform: translateX(3px); }
+.hero-note { margin-top: 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; font-size: 16px; color: var(--ink-2); }
+.hero-note a { font-weight: 700; color: var(--ink); border-bottom: 1.5px solid var(--ink); }
+
+/* =========================================================
+   ご相談の流れ
+   ========================================================= */
+.flow { background: var(--tile); }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; counter-reset: step; }
+.step { position: relative; background: var(--white); border-radius: var(--r-lg); padding: 36px 32px; }
+.step .no { font-family: var(--en); font-size: 15px; font-weight: 600; letter-spacing: .12em; color: var(--accent); }
+.step h3 { margin-top: 10px; font-size: 22px; font-weight: 700; line-height: 1.45; }
+.step p { margin-top: 10px; font-size: 16px; color: var(--ink-2); line-height: 1.85; }
+.step .time { display: inline-block; margin-top: 16px; padding: 4px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 14px; font-weight: 700; }
+.step:not(:last-child)::after { content: ""; position: absolute; right: -12px; top: 50%; width: 8px; height: 8px; border-top: 2px solid var(--ink-3); border-right: 2px solid var(--ink-3); transform: translateY(-50%) rotate(45deg); }
+
+/* =========================================================
+   お約束 ＋ 代表メッセージ
+   ========================================================= */
+.trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.promise-list li { padding: 26px 0; box-shadow: 0 -1px 0 var(--hair); }
+.promise-list li:last-child { box-shadow: 0 -1px 0 var(--hair), 0 1px 0 var(--hair); }
+.promise-list h3 { font-size: 21px; font-weight: 700; display: flex; align-items: center; gap: 14px; }
+.promise-list h3 span { font-family: var(--en); font-size: 15px; font-weight: 600; color: var(--accent); }
+.promise-list p { margin-top: 8px; font-size: 16px; color: var(--ink-2); }
+.message { background: var(--tile); border-radius: var(--r-lg); padding: 48px; }
+.message .quote { font-size: clamp(24px, 2.4vw, 30px); font-weight: 700; line-height: 1.55; }
+.message p:not(.quote):not(.sign) { margin-top: 18px; font-size: 17px; color: var(--ink-2); line-height: 2; }
+.sign { margin-top: 28px; display: flex; align-items: center; gap: 16px; font-size: 15px; color: var(--ink-2); }
+.sign::before { content: ""; width: 36px; height: 1px; background: var(--ink); }
+.sign strong { display: block; font-size: 20px; letter-spacing: .12em; color: var(--ink); }
+
+/* =========================================================
+   よくあるご質問
+   ========================================================= */
+.faq-list { max-width: 860px; margin: 48px auto 0; }
+.faq-list details { border-radius: var(--r-md); background: var(--tile); margin-bottom: 12px; }
+.faq-list summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 16px; padding: 22px 26px; font-size: 18px; font-weight: 700; line-height: 1.6; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::before { content: "Q"; font-family: var(--en); font-weight: 700; color: var(--accent); font-size: 18px; }
+.faq-list summary::after { content: ""; margin-left: auto; width: 10px; height: 10px; flex-shrink: 0; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: rotate(45deg); transition: transform .3s; }
+.faq-list details[open] summary::after { transform: rotate(-135deg); }
+.faq-list details p { padding: 0 26px 24px 58px; font-size: 17px; color: var(--ink-2); }
+
+/* =========================================================
+   お問い合わせ
+   ========================================================= */
+.contact { background: var(--tile); }
+.contact-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 40px; margin-bottom: 40px; }
+.contact-meta { display: flex; flex-wrap: wrap; gap: 10px; }
+.contact-meta li { padding: 8px 16px; border-radius: 999px; background: var(--white); font-size: 15px; font-weight: 600; }
+.contact-meta a { border-bottom: 1.5px solid var(--ink); }
+.contact .inquiry { max-width: 880px; margin: 0 auto; scroll-margin-top: calc(var(--header) + 12px); }
+.svc-info { margin-top: 14px; padding: 18px 22px; border-radius: var(--r-sm); background: var(--accent-soft); }
+.svc-info .si-title { font-size: 15px; font-weight: 700; color: var(--accent); }
+.svc-info ul { margin-top: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 2px 20px; }
+.svc-info li { position: relative; padding-left: 16px; font-size: 16px; line-height: 1.75; }
+.svc-info li::before { content: ""; position: absolute; left: 2px; top: .7em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.reassure { margin-top: 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; font-size: 15px; color: var(--ink-2); }
+.reassure span::before { content: "✓ "; color: var(--ok); font-weight: 700; }
+
+/* フォーム */
+.inquiry { background: var(--white); border-radius: 36px; padding: 56px; }
+.form-note { font-size: 15px; color: var(--ink-3); margin-bottom: 40px; }
+.f-block + .f-block { margin-top: 64px; }
+.f-step { display: flex; align-items: baseline; gap: 16px; margin-bottom: 26px; font-size: 24px; font-weight: 700; letter-spacing: -.005em; }
+.f-step b { font-family: var(--en); font-size: 15px; font-weight: 600; letter-spacing: .1em; color: var(--accent); }
+
+.method { border: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.method legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.method-card { position: relative; cursor: pointer; }
+.method-card input { position: absolute; opacity: 0; pointer-events: none; }
+.mc-body { position: relative; display: flex; flex-direction: column; gap: 18px; height: 100%; padding: 26px 26px 24px; border-radius: var(--r-md); background: var(--field); box-shadow: inset 0 0 0 1.5px transparent; transition: box-shadow .25s, background .25s; }
+.mc-icon { width: 36px; height: 36px; color: var(--ink); }
+.mc-icon svg { width: 100%; height: 100%; }
+.mc-body strong { display: block; font-size: 19px; font-weight: 700; line-height: 1.45; }
+.mc-body small { display: block; font-size: 15px; color: var(--ink-2); margin-top: 4px; line-height: 1.65; }
+.mc-check { position: absolute; top: 22px; right: 22px; width: 26px; height: 26px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px #c7c7cc; background: var(--white); transition: .25s; }
+.method-card:hover .mc-body { background: var(--tile-hover); }
+.method-card input:checked + .mc-body { background: var(--white); box-shadow: inset 0 0 0 2px var(--ink); }
+.method-card input:checked + .mc-body .mc-check { background: var(--ink); box-shadow: none; }
+.method-card input:checked + .mc-body .mc-check::after { content: ""; position: absolute; left: 9px; top: 6px; width: 6px; height: 11px; border-right: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(45deg); }
+.method-card input:focus-visible + .mc-body { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.f-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 20px; }
+.f-row { display: flex; flex-direction: column; gap: 10px; }
+.f-row.full { grid-column: 1 / -1; }
+.f-row > label, .f-label { font-size: 16px; font-weight: 600; color: var(--ink); }
+.req { display: none; }
+.opt { font-weight: 400; color: var(--ink-3); margin-left: 8px; font-size: 15px; }
+.inquiry input[type="text"], .inquiry input[type="email"], .inquiry input[type="tel"], .inquiry input[type="date"],
+.inquiry select, .inquiry textarea {
+  width: 100%; min-height: 62px; padding: 16px 18px; font: inherit; font-size: 18px; color: var(--ink); letter-spacing: .02em;
+  background: var(--field); border: none; border-radius: var(--r-sm); box-shadow: inset 0 0 0 1.5px transparent;
+  transition: background .2s, box-shadow .2s; -webkit-appearance: none; appearance: none;
+}
+.inquiry select { padding-right: 48px; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231d1d1f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center; background-size: 20px; }
+.inquiry textarea { min-height: 168px; resize: vertical; line-height: 1.8; }
+.inquiry ::placeholder { color: #8e8e93; }
+.inquiry input:hover, .inquiry select:hover, .inquiry textarea:hover { background-color: #ececef; }
+.inquiry input:focus, .inquiry select:focus, .inquiry textarea:focus { outline: none; background-color: var(--white); box-shadow: inset 0 0 0 2px var(--ink), 0 0 0 5px rgba(0,0,0,.05); }
+.inquiry .is-invalid { box-shadow: inset 0 0 0 2px var(--error) !important; background-color: #fff !important; }
+.hint { font-size: 15px; color: var(--ink-2); line-height: 1.75; }
+.zip-status.is-ok { color: var(--ink); font-weight: 600; }
+.zip-status.is-ok::before { content: "✓ "; color: var(--accent); }
+.zip-status.is-ng, .f-error { color: var(--error); font-size: 15px; font-weight: 600; }
+.f-error:empty { display: none; }
+
+.zip-box { display: flex; gap: 10px; }
+.zip-box input { flex: 1; min-width: 0; letter-spacing: .12em !important; }
+.zip-btn { flex-shrink: 0; padding: 0 22px; border: none; border-radius: var(--r-sm); background: var(--ink); color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background .2s; }
+.zip-btn:hover { background: #000; }
+.inquiry .is-filled { animation: filled 1.6s var(--ease); }
+@keyframes filled { 0% { background-color: #f3ece3; } 100% { background-color: var(--field); } }
+
+.visit-only { display: none; }
+.inquiry.is-visit .visit-only { display: block; animation: rise .6s var(--ease); }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.addr-label { grid-column: 1 / -1; font-size: 16px; color: var(--ink-2); padding-top: 8px; }
+
+.slots { display: grid; gap: 14px; margin-top: 18px; }
+.slot { display: grid; grid-template-columns: 110px 1fr 1fr; gap: 12px; align-items: center; }
+.slot-no { font-size: 16px; font-weight: 600; color: var(--ink-2); }
+.slot .f-error { grid-column: 2 / -1; }
+.radio-line { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+.radio-line label { position: relative; display: inline-flex; align-items: center; min-height: 52px; padding: 0 22px; border-radius: 999px; background: var(--field); font-size: 16px; font-weight: 500; cursor: pointer; transition: background .2s, color .2s; }
+.radio-line input { position: absolute; opacity: 0; }
+.radio-line label:has(input:checked) { background: var(--ink); color: #fff; }
+.radio-line label:has(input:focus-visible) { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.agree { display: flex; gap: 14px; align-items: flex-start; margin-top: 40px; font-size: 16px; color: var(--ink-2); cursor: pointer; }
+.agree input { accent-color: var(--ink); width: 22px; height: 22px; margin-top: 4px; flex-shrink: 0; }
+.inquiry .submit { width: 100%; min-height: 68px; margin-top: 28px; font-size: 19px; }
+
+.result { display: none; margin-top: 28px; padding: 30px; border-radius: var(--r-md); background: var(--tile); font-size: 16px; color: var(--ink-2); }
+.result.is-show { display: block; animation: rise .6s var(--ease); }
+.result strong { display: block; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.result a { color: var(--ink); font-weight: 600; }
+.result textarea { margin-top: 16px; min-height: 220px; font-size: 15px !important; background: var(--white) !important; }
+.result .copy-btn { margin-top: 14px; min-height: 50px; padding: 0 24px; border: none; border-radius: 999px; background: var(--ink); color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; }
+
+
+/* フォーム上部の所要時間 */
+.form-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-bottom: 36px; }
+.form-top .form-note { margin: 0; }
+.time-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 15px; font-weight: 700; }
+.time-badge svg { width: 18px; height: 18px; }
+
+/* =========================================================
+   フッター
+   ========================================================= */
+.footer { padding: 56px 0 40px; font-size: 15px; color: var(--ink-2); }
+.footer-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 28px; box-shadow: 0 1px 0 var(--hair); }
+.footer-nav { display: flex; flex-wrap: wrap; gap: 10px 28px; }
+.footer-nav a:hover { color: var(--ink); }
+.copyright { margin-top: 24px; font-family: var(--en); font-size: 13px; letter-spacing: .06em; color: var(--ink-3); }
+
+/* スマホ下部の固定ボタン */
+.dock { display: none; }
+
+/* スクロール時のふわっと表示 */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } * { animation: none !important; } }
+
+/* =========================================================
+   画面幅ごとの調整（タブレット・スマートフォン）
+   ========================================================= */
+@media (max-height: 820px) and (min-width: 861px) { .svc-img { height: 120px; } .hero { padding-top: calc(var(--header) + 28px); } }
+@media (max-width: 1024px) {
+  .trust-grid { grid-template-columns: 1fr; gap: 48px; }
+  .head-hours { display: none; }
+}
+@media (max-width: 860px) {
+  .svc-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps { grid-template-columns: 1fr; }
+  .step:not(:last-child)::after { right: 50%; top: auto; bottom: -12px; transform: translateX(50%) rotate(135deg); }
+}
+@media (max-width: 600px) {
+  :root { --header: 64px; }
+  body { font-size: 17px; }
+  .container { padding: 0 16px; }
+  .section { padding: 88px 0; }
+  .logo-text .mark { font-size: 23px; }
+  .head-cta { min-height: 44px; padding: 0 16px; font-size: 15px; }
+  .head-cta svg { display: none; }
+
+  .hero { padding: calc(var(--header) + 18px) 0 48px; }
+  .hero-head { margin-bottom: 16px; }
+  .hero h1 { font-size: 25px; }
+  .hero h1 small { font-size: 14px; margin-bottom: 6px; }
+  .hero-lead { display: none; }
+  .chips { margin-top: 10px; }
+  .chips li { font-size: 13px; padding: 4px 10px; }
+  .chips li:nth-child(n+3) { display: none; }
+
+  .svc-grid { gap: 10px; }
+  .svc-card { border-radius: 18px; }
+  .svc-img { height: 84px; }
+  .svc-img .tag { display: none; }
+  .svc-body { padding: 12px 12px 14px; gap: 8px; }
+  .svc-card h2 { font-size: 17px; }
+  .svc-card .meta { display: none; }
+  .svc-go { width: 32px; height: 32px; }
+  .svc-go .chev { width: 7px; height: 7px; }
+  .hero-note { font-size: 15px; justify-content: center; text-align: center; }
+
+  .message { padding: 32px 22px; }
+  .faq-list summary { padding: 18px 18px; font-size: 17px; }
+  .faq-list details p { padding: 0 18px 20px 18px; }
+  .svc-info ul { grid-template-columns: 1fr; }
+
+  /* 下部固定の相談ボタン */
+  .dock {
+    display: flex; gap: 8px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.92);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 -1px 0 var(--hair);
+    transition: transform .35s var(--ease);
+  }
+  .dock.is-hidden { transform: translateY(110%); }
+  .dock .btn { flex: 1; min-height: 54px; padding: 0 10px; font-size: 16px; }
+  .footer { padding-bottom: 110px; }
+}
+@media (max-width: 600px) {
+  .inquiry { padding: 32px 18px; border-radius: 26px; }
+  .f-step { font-size: 21px; }
+  .method, .f-grid { grid-template-columns: 1fr; }
+  .slot { grid-template-columns: 1fr 1fr; }
+  .slot-no, .slot .f-error { grid-column: 1 / -1; }
+  .zip-btn { padding: 0 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== ヘッダー ===================== -->
+<header class="header" id="header">
+  <div class="container">
+    <!-- ロゴエリア：画像ができたら <span class="logo-text">〜</span> を
+         <img src="images/logo.svg" alt="JIN株式会社" class="logo-img"> に置き換えてください -->
+    <a href="#top" class="logo" aria-label="JIN株式会社 トップへ">
+      <span class="logo-text"><span class="mark">JIN</span><span class="name">株式会社</span></span>
+    </a>
+    <div class="head-right">
+      <p class="head-hours"><b>平日 10:00〜15:00</b>ご相談・お見積もり無料</p>
+      <a href="#contact" class="head-cta" data-method="mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>無料で相談する</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ===================== ファーストビュー：スクロールせずにサービスを選べる ===================== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-head">
+      <div>
+        <h1><small>住まいと資産の、ひとつの相談窓口</small>どんなことで、お困りですか？</h1>
+        <ul class="chips">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16 10"/></svg>相談・見積もり無料</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16 10"/></svg>強引な営業なし</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16 10"/></svg>入力は約1分</li>
+        </ul>
+      </div>
+      <p class="hero-lead">あてはまるものを選ぶと、<br>そのままご相談フォームへ進みます。</p>
+    </div>
+
+    <!-- サービス選択（タップでフォームへ移動し、ご相談内容が自動で選択されます） -->
+    <div class="svc-grid">
+      <a href="#inquiryForm" class="svc-card" data-service="不動産管理" aria-label="不動産管理について相談する">
+        <div class="svc-img"><svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8eef6"/><stop offset="1" stop-color="#f8f5ef"/></linearGradient></defs><rect width="400" height="200" fill="url(#g1)"/><circle cx="318" cy="52" r="26" fill="#f6e6cf"/><rect x="60" y="62" width="92" height="118" rx="4" fill="#fff"/><rect x="72" y="76" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="92" y="76" width="12" height="11" rx="1.5" fill="#f2d3ae"/><rect x="112" y="76" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="132" y="76" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="72" y="96" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="92" y="96" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="112" y="96" width="12" height="11" rx="1.5" fill="#f2d3ae"/><rect x="132" y="96" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="72" y="116" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="92" y="116" width="12" height="11" rx="1.5" fill="#f2d3ae"/><rect x="112" y="116" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="132" y="116" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="72" y="136" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="92" y="136" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="112" y="136" width="12" height="11" rx="1.5" fill="#f2d3ae"/><rect x="132" y="136" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="72" y="156" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="92" y="156" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="112" y="156" width="12" height="11" rx="1.5" fill="#f2d3ae"/><rect x="132" y="156" width="12" height="11" rx="1.5" fill="#e4e9f0"/><rect x="160" y="34" width="70" height="146" rx="4" fill="#fff"/><rect x="171" y="48" width="12" height="12" rx="1.5" fill="#e4e9f0"/><rect x="190" y="48" width="12" height="12" rx="1.5" fill="#e4e9f0"/><rect x="209" y="48" width="12" height="12" rx="1.5" fill="#f2d3ae"/><rect x="171" y="69" width="12" height="12" rx="1.5" fill="#e4e9f0"/><rect x="190" y="69" width="12" height="12" rx="1.5" fill="#f2d3ae"/><rect x="209" y="69" width="12" height="12" rx="1.5" fill="#e4e9f0"/><rect x="171" y="90" width="12" height="12" rx="1.5" fill="#e4e9f0"/><rect x="190" y="90" width="12" height="12" rx="1.5" fill="#e4e9f0"/><rect x="209" y="90" width="12" height="12" rx="1.5" fill="#e4e9f0"/><rect x="171" y="111" width="12" height="12" rx="1.5" fill="#e4e9f0"/><rect x="190" y="111" width="12" height="12" rx="1.5" fill="#f2d3ae"/><rect x="209" y="111" width="12" height="12" rx="1.5" fill="#e4e9f0"/><rect x="171" y="132" width="12" height="12" rx="1.5" fill="#e4e9f0"/><rect x="190" y="132" width="12" height="12" rx="1.5" fill="#f2d3ae"/><rect x="209" y="132" width="12" height="12" rx="1.5" fill="#e4e9f0"/><rect x="171" y="153" width="12" height="12" rx="1.5" fill="#e4e9f0"/><rect x="190" y="153" width="12" height="12" rx="1.5" fill="#f2d3ae"/><rect x="209" y="153" width="12" height="12" rx="1.5" fill="#e4e9f0"/><rect x="238" y="88" width="100" height="92" rx="4" fill="#fff"/><rect x="250" y="100" width="13" height="12" rx="1.5" fill="#f2d3ae"/><rect x="272" y="100" width="13" height="12" rx="1.5" fill="#e4e9f0"/><rect x="294" y="100" width="13" height="12" rx="1.5" fill="#e4e9f0"/><rect x="316" y="100" width="13" height="12" rx="1.5" fill="#e4e9f0"/><rect x="250" y="122" width="13" height="12" rx="1.5" fill="#e4e9f0"/><rect x="272" y="122" width="13" height="12" rx="1.5" fill="#f2d3ae"/><rect x="294" y="122" width="13" height="12" rx="1.5" fill="#e4e9f0"/><rect x="316" y="122" width="13" height="12" rx="1.5" fill="#f2d3ae"/><rect x="250" y="144" width="13" height="12" rx="1.5" fill="#e4e9f0"/><rect x="272" y="144" width="13" height="12" rx="1.5" fill="#e4e9f0"/><rect x="294" y="144" width="13" height="12" rx="1.5" fill="#e4e9f0"/><rect x="316" y="144" width="13" height="12" rx="1.5" fill="#f2d3ae"/><rect x="0" y="178" width="400" height="22" fill="#e6e3dc"/><path d="M40 190h340" stroke="#fff" stroke-width="2" stroke-dasharray="18 14"/></svg><span class="tag">01</span></div>
+        <div class="svc-body"><div class="txt"><h2>不動産管理</h2><p class="meta">賃貸管理・入居者募集</p></div><span class="svc-go"><span class="chev"></span></span></div>
+      </a>
+      <a href="#inquiryForm" class="svc-card" data-service="お家の修理（リフォーム・修繕）" aria-label="お家の修理について相談する">
+        <div class="svc-img"><svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5ede2"/><stop offset="1" stop-color="#fbf8f3"/></linearGradient></defs><rect width="400" height="200" fill="url(#g2)"/><rect x="0" y="170" width="400" height="30" fill="#e9e1d4"/><path d="M120 172V98l80-58 80 58v74z" fill="#fff"/><path d="M104 106l96-72 96 72" fill="none" stroke="#b98d66" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><rect x="150" y="112" width="34" height="30" rx="3" fill="#f2d3ae"/><path d="M167 112v30M150 127h34" stroke="#fff" stroke-width="2"/><rect x="214" y="122" width="30" height="50" rx="3" fill="#e4dccd"/><g stroke="#8a6a46" stroke-width="4" stroke-linecap="round"><path d="M300 172l26-112M330 172l-4-112"/><path d="M304 154h26M308 134h22M313 114h17M317 94h14M321 76h10"/></g><g transform="translate(64 128) rotate(-30)"><rect x="0" y="0" width="8" height="40" rx="3" fill="#8a6a46"/><rect x="-10" y="-6" width="28" height="12" rx="3" fill="#5b5f66"/></g></svg><span class="tag">02</span></div>
+        <div class="svc-body"><div class="txt"><h2>お家の修理</h2><p class="meta">リフォーム・修繕</p></div><span class="svc-go"><span class="chev"></span></span></div>
+      </a>
+      <a href="#inquiryForm" class="svc-card" data-service="草刈り・除草" aria-label="草刈り・除草について相談する">
+        <div class="svc-img"><svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eaf2e4"/><stop offset="1" stop-color="#f7faf3"/></linearGradient></defs><rect width="400" height="200" fill="url(#g3)"/><circle cx="320" cy="50" r="24" fill="#f6e6bf"/><path d="M0 140c70-40 140-40 210-14s130 18 190-12v86H0z" fill="#cfe2c3"/><path d="M0 166c90-28 170-24 250-4s110 8 150-6v44H0z" fill="#b5d3a5"/><path d="M12 200c-2-36 6-30 4-50" fill="none" stroke="#88b474" stroke-width="3" stroke-linecap="round"/><path d="M29 200c-2-23 -6-35 -4-49" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><path d="M46 200c-2-32 6-40 4-48" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><path d="M63 200c-2-19 -6-45 -4-47" fill="none" stroke="#88b474" stroke-width="3" stroke-linecap="round"/><path d="M80 200c-2-28 6-30 4-46" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><path d="M97 200c-2-37 -6-35 -4-45" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><path d="M114 200c-2-24 6-40 4-44" fill="none" stroke="#88b474" stroke-width="3" stroke-linecap="round"/><path d="M131 200c-2-33 -6-45 -4-43" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><path d="M148 200c-2-20 6-30 4-42" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><path d="M165 200c-2-29 -6-35 -4-41" fill="none" stroke="#88b474" stroke-width="3" stroke-linecap="round"/><path d="M182 200c-2-38 6-40 4-40" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><path d="M199 200c-2-25 -6-45 -4-65" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><path d="M216 200c-2-34 6-30 4-64" fill="none" stroke="#88b474" stroke-width="3" stroke-linecap="round"/><path d="M233 200c-2-21 -6-35 -4-63" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><path d="M250 200c-2-30 6-40 4-62" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><path d="M267 200c-2-39 -6-45 -4-61" fill="none" stroke="#88b474" stroke-width="3" stroke-linecap="round"/><path d="M284 200c-2-26 6-30 4-60" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><path d="M301 200c-2-35 -6-35 -4-59" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><path d="M318 200c-2-22 6-40 4-58" fill="none" stroke="#88b474" stroke-width="3" stroke-linecap="round"/><path d="M335 200c-2-31 -6-45 -4-57" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><path d="M352 200c-2-18 6-30 4-56" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><path d="M369 200c-2-27 -6-35 -4-55" fill="none" stroke="#88b474" stroke-width="3" stroke-linecap="round"/><path d="M386 200c-2-36 6-40 4-54" fill="none" stroke="#6f9f5c" stroke-width="3" stroke-linecap="round"/><g transform="translate(250 118)"><path d="M0 0l40 60" stroke="#5b5f66" stroke-width="5" stroke-linecap="round"/><path d="M36 54c10 4 22 2 30-6" fill="none" stroke="#8a6a46" stroke-width="6" stroke-linecap="round"/></g></svg><span class="tag">03</span></div>
+        <div class="svc-body"><div class="txt"><h2>草刈り・除草</h2><p class="meta">空き地・お庭・駐車場</p></div><span class="svc-go"><span class="chev"></span></span></div>
+      </a>
+      <a href="#inquiryForm" class="svc-card" data-service="除雪" aria-label="除雪について相談する">
+        <div class="svc-img"><svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e3ecf6"/><stop offset="1" stop-color="#f6f9fc"/></linearGradient></defs><rect width="400" height="200" fill="url(#g4)"/><path d="M70 176V118l56-38 56 38v58z" fill="#fff"/><path d="M58 122l68-48 68 48" fill="none" stroke="#c9d6e4" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M52 118c20-18 48-40 74-50 26 10 54 32 74 50-24-6-50-30-74-38-24 8-50 32-74 38z" fill="#fff"/><rect x="108" y="126" width="30" height="26" rx="3" fill="#f2d3ae"/><path d="M220 176v-40l42-30 42 30v40z" fill="#fff"/><path d="M212 140c18-16 34-28 50-36 16 8 32 20 50 36-18-4-34-18-50-26-16 8-32 22-50 26z" fill="#fff" stroke="#d5e0ec" stroke-width="2"/><path d="M0 168c80-14 160-12 240-2s120 8 160-2v36H0z" fill="#fff"/><path d="M0 176c100-10 200-6 400 0" stroke="#dce6f1" stroke-width="3" fill="none"/><circle cx="53" cy="45" r="3" fill="#fff" opacity=".95"/><circle cx="106" cy="82" r="4" fill="#fff" opacity=".95"/><circle cx="159" cy="119" r="2" fill="#fff" opacity=".95"/><circle cx="212" cy="156" r="3" fill="#fff" opacity=".95"/><circle cx="265" cy="43" r="4" fill="#fff" opacity=".95"/><circle cx="318" cy="80" r="2" fill="#fff" opacity=".95"/><circle cx="371" cy="117" r="3" fill="#fff" opacity=".95"/><circle cx="24" cy="154" r="4" fill="#fff" opacity=".95"/><circle cx="77" cy="41" r="2" fill="#fff" opacity=".95"/><circle cx="130" cy="78" r="3" fill="#fff" opacity=".95"/><circle cx="183" cy="115" r="4" fill="#fff" opacity=".95"/><circle cx="236" cy="152" r="2" fill="#fff" opacity=".95"/><circle cx="289" cy="39" r="3" fill="#fff" opacity=".95"/><circle cx="342" cy="76" r="4" fill="#fff" opacity=".95"/><circle cx="395" cy="113" r="2" fill="#fff" opacity=".95"/><circle cx="48" cy="150" r="3" fill="#fff" opacity=".95"/><circle cx="101" cy="37" r="4" fill="#fff" opacity=".95"/><circle cx="154" cy="74" r="2" fill="#fff" opacity=".95"/><circle cx="207" cy="111" r="3" fill="#fff" opacity=".95"/><circle cx="260" cy="148" r="4" fill="#fff" opacity=".95"/><circle cx="313" cy="35" r="2" fill="#fff" opacity=".95"/><circle cx="366" cy="72" r="3" fill="#fff" opacity=".95"/><circle cx="19" cy="109" r="4" fill="#fff" opacity=".95"/><circle cx="72" cy="146" r="2" fill="#fff" opacity=".95"/><circle cx="125" cy="33" r="3" fill="#fff" opacity=".95"/><circle cx="178" cy="70" r="4" fill="#fff" opacity=".95"/><circle cx="231" cy="107" r="2" fill="#fff" opacity=".95"/><circle cx="284" cy="144" r="3" fill="#fff" opacity=".95"/><circle cx="337" cy="31" r="4" fill="#fff" opacity=".95"/><circle cx="390" cy="68" r="2" fill="#fff" opacity=".95"/><circle cx="43" cy="105" r="3" fill="#fff" opacity=".95"/><circle cx="96" cy="142" r="4" fill="#fff" opacity=".95"/><circle cx="149" cy="29" r="2" fill="#fff" opacity=".95"/><g stroke="#5b5f66" stroke-width="4" stroke-linecap="round"><path d="M336 172l12-58"/></g><path d="M326 172h28l-4 10h-20z" fill="#8a6a46"/></svg><span class="tag">04</span></div>
+        <div class="svc-body"><div class="txt"><h2>除雪</h2><p class="meta">駐車場・通路・敷地</p></div><span class="svc-go"><span class="chev"></span></span></div>
+      </a>
+      <a href="#inquiryForm" class="svc-card" data-service="相続でのお困り事" aria-label="相続について相談する">
+        <div class="svc-img"><svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="g5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4efe7"/><stop offset="1" stop-color="#fbf9f5"/></linearGradient></defs><rect width="400" height="200" fill="url(#g5)"/><circle cx="300" cy="96" r="54" fill="#d9e5d1"/><circle cx="268" cy="118" r="34" fill="#c7d9bd"/><rect x="292" y="130" width="8" height="46" rx="3" fill="#a08566"/><path d="M60 176v-56h120v56z" fill="#fff"/><path d="M40 124l80-46 80 46z" fill="#6f747c"/><path d="M48 124h144" stroke="#5b5f66" stroke-width="4" stroke-linecap="round"/><rect x="80" y="134" width="30" height="28" rx="2" fill="#f2d3ae"/><rect x="128" y="134" width="34" height="42" rx="2" fill="#e8e0d2"/><rect x="0" y="174" width="400" height="26" fill="#ebe4d8"/><g transform="translate(208 112) rotate(-6)"><rect width="56" height="70" rx="4" fill="#fff" stroke="#e3dccf" stroke-width="2"/><path d="M10 16h36M10 28h36M10 40h24" stroke="#cfc5b4" stroke-width="3" stroke-linecap="round"/><circle cx="42" cy="56" r="8" fill="#c96a4a" opacity=".85"/></g></svg><span class="tag">05</span></div>
+        <div class="svc-body"><div class="txt"><h2>相続</h2><p class="meta">有資格者が丁寧に対応</p></div><span class="svc-go"><span class="chev"></span></span></div>
+      </a>
+      <a href="#inquiryForm" class="svc-card" data-service="資産の運用相談" aria-label="資産運用について相談する">
+        <div class="svc-img"><svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="g6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#edf1f6"/><stop offset="1" stop-color="#f8f6f1"/></linearGradient></defs><rect width="400" height="200" fill="url(#g6)"/><rect x="0" y="170" width="400" height="30" fill="#e6e3dc"/><path d="M40 170l40-24h110l-40 24z" fill="#dbe6d3"/><path d="M160 170l40-24h110l-40 24z" fill="#efe6d8"/><path d="M206 152v-22l18-12 18 12v22z" fill="#fff"/><rect x="218" y="136" width="10" height="9" rx="1" fill="#f2d3ae"/><g fill="#fff"><rect x="56" y="118" width="26" height="40" rx="4"/><rect x="92" y="96" width="26" height="62" rx="4"/><rect x="128" y="70" width="26" height="88" rx="4"/></g><path d="M48 120l44-24 36-14 46-40 36-8" fill="none" stroke="#8a6a46" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M196 30l14 4-8 12" fill="none" stroke="#8a6a46" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="318" cy="120" r="22" fill="#f1dfc0"/><circle cx="318" cy="120" r="14" fill="none" stroke="#d8b98a" stroke-width="3"/><circle cx="344" cy="140" r="16" fill="#ecd6b1"/></svg><span class="tag">06</span></div>
+        <div class="svc-body"><div class="txt"><h2>資産運用</h2><p class="meta">土地・建物の活用</p></div><span class="svc-go"><span class="chev"></span></span></div>
+      </a>
+    </div>
+
+    <p class="hero-note"><span>どれにあてはまるか分からない場合も、お気軽にどうぞ。</span><a href="#contact" data-method="mail">まとめて相談する</a></p>
+  </div>
+</section>
+
+<!-- ===================== ご相談の流れ ===================== -->
+<section class="section flow" id="flow">
+  <div class="container">
+    <div class="center reveal">
+      <span class="label">ご相談の流れ</span>
+      <h2 class="title">ご相談は、かんたん3ステップ。</h2>
+      <p class="sub">お問い合わせから、ご相談・現地確認まで。費用がかかるのは、内容にご納得いただいてからです。</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><span class="no">ステップ 1</span><h3>サービスを選んで、送信</h3><p>メールでのご相談か、現地への訪問かを選んで、フォームに入力するだけ。</p><span class="time">約1分</span></div>
+      <div class="step reveal"><span class="no">ステップ 2</span><h3>担当者からメールでご連絡</h3><p>受付時間（平日10:00〜15:00）内に、担当者より順次ご返信いたします。</p><span class="time">平日 10:00〜15:00</span></div>
+      <div class="step reveal"><span class="no">ステップ 3</span><h3>ご相談・現地確認</h3><p>お話を伺い、必要に応じて現地を確認。内容とお見積もりを、わかりやすくご説明します。</p><span class="time">相談・見積もり無料</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== お約束 ＋ 代表メッセージ ===================== -->
+<section class="section" id="promise">
+  <div class="container trust-grid">
+    <div class="reveal">
+      <span class="label">私たちのお約束</span>
+      <h2 class="title">安心してご相談いただくための、3つのお約束。</h2>
+      <ul class="promise-list" style="margin-top:40px">
+        <li><h3><span>01</span>強引な営業は、いたしません</h3><p>ご相談いただいたことで、ご契約をお勧めしたり、営業のご連絡をすることはありません。</p></li>
+        <li><h3><span>02</span>わかりやすく、正直にご説明します</h3><p>専門用語はできるだけ使わず、費用もメリット・デメリットも包み隠さずお伝えします。</p></li>
+        <li><h3><span>03</span>小さなことでも、最後まで</h3><p>草刈り1回、修理1か所からお受けします。ひとつの窓口で、最後まで責任を持って対応します。</p></li>
+      </ul>
+    </div>
+    <div class="message reveal">
+      <span class="label">代表メッセージ</span>
+      <p class="quote">話しにくいことほど、<br>ゆっくり、丁寧に伺います。</p>
+      <p>不動産や相続のことは、わかりにくく、どこか構えてしまうもの。だからこそ私たちは、まずお話を最後まで伺うことを何より大切にしています。この地域で、長く安心してお付き合いいただける存在でありたいと考えています。</p>
+      <p class="sign"><span>JIN株式会社　代表取締役<strong>山本 有華</strong></span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== よくあるご質問 ===================== -->
+<section class="section" id="faq" style="padding-top:0">
+  <div class="container">
+    <div class="center reveal">
+      <span class="label">はじめての方へ</span>
+      <h2 class="title">よくあるご質問</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details><summary>相談だけでも大丈夫ですか？</summary><p>はい、もちろんです。ご相談・お見積もりは無料です。ご相談いただいたことで、ご契約をお勧めしたり、営業のご連絡をすることはありません。</p></details>
+      <details><summary>何を相談すればいいのか、まとまっていなくても大丈夫ですか？</summary><p>大丈夫です。「何から始めればいいか分からない」という段階からお話を伺います。フォームの「その他」を選んで、思いつくままにご記入ください。</p></details>
+      <details><summary>現地に来てもらう日時は選べますか？</summary><p>はい。フォームで「現地への訪問を希望する」を選び、平日10:00〜15:00の間でご希望の日時を3つお選びください。ご希望に添えない場合は、メールで調整させていただきます。</p></details>
+      <details><summary>電話番号の入力は必要ですか？</summary><p>任意です。ご連絡は基本的にメールで行います。お急ぎの場合や、訪問当日に連絡が取れなかった場合に備えて、お持ちの方はご記入ください。</p></details>
+      <details><summary>相続の相談は、どなたが対応しますか？</summary><p>有資格者が丁寧にお話を伺います。必要に応じて、税理士・司法書士などの専門家と連携して進めます。</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== お問い合わせ ===================== -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="contact-head reveal">
+      <div>
+        <span class="label">お問い合わせ</span>
+        <h2 class="title">ご相談フォーム</h2>
+      </div>
+      <ul class="contact-meta">
+        <li>受付・訪問　平日 10:00〜15:00</li>
+        <li><a href="mailto:info@jinkanri.com">info@jinkanri.com</a></li>
+      </ul>
+    </div>
+      <form class="inquiry reveal" id="inquiryForm" novalidate>
+        <div class="form-top">
+          <p class="form-note">「任意」の表示がない項目は、ご記入をお願いいたします。</p>
+          <span class="time-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>入力は約1分</span>
+        </div>
+
+        <div class="f-block">
+          <p class="f-step"><b>01</b>ご相談の方法</p>
+          <fieldset class="method">
+            <legend>お問い合わせ方法</legend>
+            <label class="method-card">
+              <input type="radio" name="method" value="mail" checked>
+              <span class="mc-body">
+                <span class="mc-icon"><svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="28" height="20" rx="3"/><path d="m5 10 13 9 13-9"/></svg></span>
+                <span><strong>メールで相談する</strong><small>まずは内容を相談・質問したい方</small></span>
+                <span class="mc-check"></span>
+              </span>
+            </label>
+            <label class="method-card">
+              <input type="radio" name="method" value="visit">
+              <span class="mc-body">
+                <span class="mc-icon"><svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 32s-10-8.6-10-16a10 10 0 0 1 20 0c0 7.4-10 16-10 16z"/><circle cx="18" cy="16" r="3.5"/></svg></span>
+                <span><strong>現地への訪問を希望する</strong><small>現地の調査・確認、お見積もりをご希望の方</small></span>
+                <span class="mc-check"></span>
+              </span>
+            </label>
+          </fieldset>
+        </div>
+
+        <div class="f-block">
+          <p class="f-step"><b>02</b>お客様について</p>
+          <div class="f-grid">
+            <div class="f-row full">
+              <label for="service">ご相談内容</label>
+              <select id="service" name="service" required>
+                <option value="">選択してください</option><option>不動産管理</option><option>お家の修理（リフォーム・修繕）</option><option>草刈り・除草</option><option>除雪</option><option>相続でのお困り事</option><option>資産の運用相談</option><option>その他</option>
+              </select>
+              <div class="svc-info" id="svcInfo" hidden></div>
+            </div>
+            <div class="f-row">
+              <label for="name">お名前</label>
+              <input type="text" id="name" name="name" required autocomplete="name" placeholder="山田 太郎">
+            </div>
+            <div class="f-row">
+              <label for="email">メールアドレス</label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="例）yamada@example.jp">
+            </div>
+            <div class="f-row full">
+              <label for="tel">ご連絡先電話番号<span class="opt">任意</span></label>
+              <input type="tel" id="tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="090-1234-5678">
+              <p class="hint">ご連絡は基本的にメールで行います。お急ぎの場合や、訪問当日に連絡が取れなかった場合のためのものです。お持ちの場合のみご記入ください。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="f-block visit-only" id="visitBlock">
+          <p class="f-step"><b>03</b>訪問先と、ご希望の日時</p>
+          <div class="f-grid">
+            <div class="f-row full">
+              <label for="zip">郵便番号<span class="opt">任意・住所を自動入力</span></label>
+              <div class="zip-box" style="max-width:440px">
+                <input type="text" id="zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="8" placeholder="000-0000">
+                <button type="button" class="zip-btn" id="zipBtn">住所を検索</button>
+              </div>
+              <p class="hint zip-status" id="zipStatus" aria-live="polite">7桁を入力すると、住所が自動で入ります。</p>
+            </div>
+            <div class="f-row full">
+              <label for="ptype">物件の種類<span class="opt">任意</span></label>
+              <select id="ptype" name="ptype">
+                <option value="">選択してください</option>
+                <option>戸建て</option><option>アパート・マンション</option><option>駐車場</option><option>土地・空き地</option><option>その他</option>
+              </select>
+            </div>
+            <p class="addr-label">スタッフが伺う現地の住所をご記入ください。</p>
+            <div class="f-row">
+              <label for="pref">都道府県</label>
+              <select id="pref" name="pref" autocomplete="address-level1"><option value="">選択してください</option></select>
+            </div>
+            <div class="f-row">
+              <label for="city">市区町村・町名</label>
+              <input type="text" id="city" name="city" autocomplete="address-level2" placeholder="〇〇市〇〇町">
+            </div>
+            <div class="f-row full">
+              <label for="banchi">番地</label>
+              <input type="text" id="banchi" name="banchi" autocomplete="address-line1" placeholder="1-2-3">
+              <p class="hint">番地が分からない土地などは「不明」とご記入ください。</p>
+            </div>
+            <div class="f-row full">
+              <label for="building">建物名・部屋番号<span class="opt">任意</span></label>
+              <input type="text" id="building" name="building" autocomplete="address-line2" placeholder="〇〇マンション 101号室">
+            </div>
+          </div>
+
+          <div style="margin-top:44px">
+            <p class="f-label">ご希望の訪問日時（3つ）</p>
+            <p class="hint" style="margin-top:6px">平日（土日祝を除く）10:00〜15:00の間でお選びください。ご希望に添えない場合は、メールにて調整させていただきます。</p>
+            <div class="slots">
+            <div class="slot">
+              <span class="slot-no">第1希望</span>
+              <input type="date" name="date1" aria-label="第1希望の日付">
+              <select name="time1" aria-label="第1希望の時間"><option value="">時間を選択</option></select>
+              <p class="f-error" aria-live="polite"></p>
+            </div>
+            <div class="slot">
+              <span class="slot-no">第2希望</span>
+              <input type="date" name="date2" aria-label="第2希望の日付">
+              <select name="time2" aria-label="第2希望の時間"><option value="">時間を選択</option></select>
+              <p class="f-error" aria-live="polite"></p>
+            </div>
+            <div class="slot">
+              <span class="slot-no">第3希望</span>
+              <input type="date" name="date3" aria-label="第3希望の日付">
+              <select name="time3" aria-label="第3希望の時間"><option value="">時間を選択</option></select>
+              <p class="f-error" aria-live="polite"></p>
+            </div>
+            </div>
+          </div>
+
+          <div class="f-row" style="margin-top:36px">
+            <p class="f-label">当日のお立ち会い</p>
+            <div class="radio-line">
+              <label><input type="radio" name="attend" value="立ち会い可能" checked>立ち会い可能</label>
+              <label><input type="radio" name="attend" value="立ち会いなしでの確認を希望">立ち会いなしで確認を希望</label>
+              <label><input type="radio" name="attend" value="未定・相談したい">未定・相談したい</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="f-block">
+          <p class="f-step"><b id="detailStepNo">03</b>ご相談の内容</p>
+          <div class="f-row">
+            <label for="message">お困りごとの内容<span class="req" id="msgReq"></span><span class="opt" id="msgOpt" hidden>任意</span></label>
+            <textarea id="message" name="message" placeholder="例）アパートの2部屋が空室のままで困っている／庭の草が伸びてきたので刈ってほしい　など"></textarea>
+          </div>
+          <label class="agree"><input type="checkbox" id="agree" required>ご入力いただいた個人情報は、ご相談への回答・訪問のご連絡にのみ使用いたします。内容に同意します。</label>
+          <p class="f-error" id="agreeErr"></p>
+          <button type="submit" class="btn submit" id="submitBtn">メールで相談する<span class="chev"></span></button>
+          <p class="reassure"><span>ご相談・お見積もり無料</span><span>営業のご連絡はいたしません</span><span>受付時間内に順次ご返信</span></p>
+        </div>
+
+        <div class="result" id="result" role="status" aria-live="polite"></div>
+      </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== フッター ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <!-- フッターのロゴも同様に <img> へ差し替え可能です -->
+      <a href="#top" class="logo" aria-label="JIN株式会社 トップへ">
+        <span class="logo-text"><span class="mark">JIN</span><span class="name">株式会社</span></span>
+      </a>
+      <nav class="footer-nav" aria-label="フッターナビ">
+        <a href="#top">サービスを選ぶ</a>
+        <a href="#flow">ご相談の流れ</a>
+        <a href="#faq">よくあるご質問</a>
+        <a href="#contact">ご相談フォーム</a>
+        <a href="mailto:info@jinkanri.com">info@jinkanri.com</a>
+      </nav>
+    </div>
+    <p class="copyright">&copy; <span id="year">2026</span> JIN株式会社</p>
+  </div>
+</footer>
+
+<!-- スマホ下部の固定ボタン -->
+<div class="dock is-hidden" id="dock">
+  <a href="#contact" class="btn" data-method="mail">メールで相談</a>
+  <a href="#contact" class="btn btn--soft" data-method="visit">訪問を依頼</a>
+</div>
+
+<script>
+(() => {
+  // ヘッダー：スクロールで背景を付ける
+  const header = document.getElementById('header');
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  // （サービスカードの動作は下の「サービス選択 → フォームへ」で設定）
+
+  /* =====================================================
+     お問い合わせフォーム
+     -----------------------------------------------------
+     ▼送信方法の設定
+     FORM_ENDPOINT が空のとき：送信ボタンでメールアプリが起動し、
+       入力内容がまとまった本文入りで info@jinkanri.com 宛のメールが作成されます。
+     FORM_ENDPOINT に Formspree 等のURLを設定したとき：
+       メールアプリを使わず、ボタン1つで info@jinkanri.com に直接届きます（推奨）。
+       例）const FORM_ENDPOINT = 'https://formspree.io/f/xxxxxxxx';
+     ===================================================== */
+  const MAIL_TO = 'info@jinkanri.com';
+  const FORM_ENDPOINT = '';
+
+  // 祝日（訪問日から除外）※毎年更新してください
+  const HOLIDAYS = [
+    '2026-01-01','2026-01-12','2026-02-11','2026-02-23','2026-03-20','2026-04-29','2026-05-04','2026-05-05','2026-05-06',
+    '2026-07-20','2026-08-11','2026-09-21','2026-09-22','2026-09-23','2026-10-12','2026-11-03','2026-11-23',
+    '2027-01-01','2027-01-11','2027-02-11','2027-02-23','2027-03-22','2027-04-29','2027-05-03','2027-05-04','2027-05-05',
+    '2027-07-19','2027-08-11','2027-09-20','2027-09-23','2027-10-11','2027-11-03','2027-11-23'
+  ];
+  const OPEN = 10 * 60, CLOSE = 15 * 60, STEP = 30;   // 訪問可能時間：10:00〜15:00（30分刻み）
+
+  const form = document.getElementById('inquiryForm');
+  const $ = sel => form.querySelector(sel);
+  const pad = n => String(n).padStart(2, '0');
+  const ymd = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const WEEK = ['日','月','火','水','木','金','土'];
+  const isBizDay = str => { const d = new Date(str + 'T00:00:00'); const w = d.getDay(); return w !== 0 && w !== 6 && !HOLIDAYS.includes(str); };
+
+  // 時間の選択肢を作成
+  const times = [];
+  for (let m = OPEN; m <= CLOSE; m += STEP) times.push(`${pad(Math.floor(m / 60))}:${pad(m % 60)}`);
+  form.querySelectorAll('.slot select').forEach(sel => {
+    sel.insertAdjacentHTML('beforeend', times.map(t => `<option value="${t}">${t}〜</option>`).join('') +
+      '<option value="10:00〜15:00の間ならいつでも可">時間指定なし</option>');
+  });
+
+  // 日付は「翌営業日」以降のみ選択可
+  const firstBizDay = () => { const d = new Date(); do { d.setDate(d.getDate() + 1); } while (!isBizDay(ymd(d))); return ymd(d); };
+  const minDate = firstBizDay();
+  const maxD = new Date(); maxD.setMonth(maxD.getMonth() + 3);
+  form.querySelectorAll('.slot input[type="date"]').forEach(inp => { inp.min = minDate; inp.max = ymd(maxD); });
+
+  // 全角数字・ハイフンを半角に
+  const toHalf = str => str.replace(/[０-９]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0)).replace(/[－ー―‐−]/g, '-');
+
+  /* ---------- 郵便番号から住所を自動入力 ----------
+     郵便番号検索API「zipcloud」（日本郵便のデータを利用・無料・登録不要）を使用。
+     JSONP方式のため、サーバーなし・ローカルのHTMLでも動作します。
+     ------------------------------------------------- */
+  const PREFS = ['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県',
+    '新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県',
+    '鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
+  $('#pref').insertAdjacentHTML('beforeend', PREFS.map(p => `<option>${p}</option>`).join(''));
+
+  const zipInput = $('#zip'), zipStatus = $('#zipStatus');
+  const setZipStatus = (msg, cls = '') => { zipStatus.textContent = msg; zipStatus.className = 'hint zip-status ' + cls; };
+  let lastZip = '';
+  const jsonp = url => new Promise((resolve, reject) => {
+    const cb = '__zip' + Date.now();
+    const sc = document.createElement('script');
+    const timer = setTimeout(() => { cleanup(); reject(new Error('timeout')); }, 8000);
+    const cleanup = () => { clearTimeout(timer); delete window[cb]; sc.remove(); };
+    window[cb] = data => { cleanup(); resolve(data); };
+    sc.onerror = () => { cleanup(); reject(new Error('network')); };
+    sc.src = `${url}&callback=${cb}`;
+    document.head.appendChild(sc);
+  });
+  const flash = el => { el.classList.remove('is-filled'); void el.offsetWidth; el.classList.add('is-filled'); el.classList.remove('is-invalid'); };
+
+  const lookupZip = async (force = false) => {
+    const digits = toHalf(zipInput.value).replace(/\D/g, '');
+    if (digits.length !== 7) { if (force) setZipStatus('郵便番号は7桁の数字で入力してください。', 'is-ng'); return; }
+    if (digits === lastZip && !force) return;
+    lastZip = digits;
+    setZipStatus('住所を検索しています…');
+    try {
+      const data = await jsonp(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${digits}`);
+      if (data.status !== 200 || !data.results) { setZipStatus('該当する住所が見つかりませんでした。お手数ですが直接ご入力ください。', 'is-ng'); return; }
+      const r = data.results[0];
+      $('#pref').value = r.address1;
+      $('#city').value = r.address2 + r.address3;
+      [$('#pref'), $('#city')].forEach(flash);
+      setZipStatus(`「${r.address1}${r.address2}${r.address3}」を入力しました。続けて番地をご入力ください。`, 'is-ok');
+      $('#banchi').focus();
+    } catch {
+      lastZip = '';
+      setZipStatus('自動入力できませんでした。お手数ですが住所を直接ご入力ください。', 'is-ng');
+    }
+  };
+  zipInput.addEventListener('input', () => {
+    const d = toHalf(zipInput.value).replace(/\D/g, '').slice(0, 7);
+    zipInput.value = d.length > 3 ? `${d.slice(0, 3)}-${d.slice(3)}` : d;   // 「000-0000」形式に自動整形
+    if (d.length === 7) lookupZip();
+  });
+  $('#zipBtn').addEventListener('click', () => lookupZip(true));
+  // 番地・電話番号の全角数字は自動で半角に
+  ['#banchi', '#tel'].forEach(q => $(q).addEventListener('blur', e => e.target.value = toHalf(e.target.value)));
+
+  // お問い合わせ方法の切り替え
+  const setMethod = method => {
+    const visit = method === 'visit';
+    form.classList.toggle('is-visit', visit);
+    $(`input[name="method"][value="${method}"]`).checked = true;
+    ['#pref', '#city', '#banchi'].forEach(q => $(q).required = visit);
+    $('#message').required = !visit;
+    $('#msgReq').hidden = visit; $('#msgOpt').hidden = !visit;
+    $('#detailStepNo').textContent = visit ? '04' : '03';
+    $('#submitBtn').firstChild.textContent = visit ? '訪問を申し込む' : 'メールで相談する';
+  };
+  form.querySelectorAll('input[name="method"]').forEach(r => r.addEventListener('change', () => setMethod(r.value)));
+  setMethod('mail');
+
+  // 各サービス詳細・トップのボタンから、方法と相談内容を選んだ状態でフォームへ
+  /* ---------- サービス選択 → フォームへ ----------
+     サービスを選ぶと、ご相談内容が選択された状態でフォームへ移動し、
+     そのサービスで「できること」を表示します。 */
+  const SERVICE_INFO = {
+    '不動産管理': ['空き部屋・空き区画の入居者（利用者）募集', '家賃管理・契約更新・退去の立ち会い', '入居者様からのお問い合わせ・トラブル対応', '建物・敷地の定期巡回'],
+    'お家の修理（リフォーム・修繕）': ['内装・水まわりのリフォーム', '外壁・屋根などの修繕', '退去後の原状回復工事', '小さな補修1か所からでも'],
+    '草刈り・除草': ['空き地・空き家の敷地の草刈り', 'お庭・駐車場まわりの除草', '一度きり／定期契約のどちらも可', '遠方にお住まいの方の土地管理'],
+    '除雪': ['駐車場・敷地内の除雪', '建物まわりの通路・出入口の除雪', 'シーズン中の定期対応', '管理物件とあわせたご依頼'],
+    '相続でのお困り事': ['有資格者が丁寧にご相談対応', '生前の対策・資産の整理', '相続した不動産の管理・活用・売却', '必要に応じて税理士・司法書士と連携'],
+    '資産の運用相談': ['空き家・空き地の活用方法のご提案', '賃貸化・駐車場化などのご相談', '保有不動産の見直し・今後の方針づくり', '管理・修繕まで含めた長期的な計画']
+  };
+  const svcSel = $('#service'), svcInfo = document.getElementById('svcInfo');
+  const showInfo = () => {
+    const list = SERVICE_INFO[svcSel.value];
+    if (!list) { svcInfo.hidden = true; return; }
+    svcInfo.innerHTML = `<p class="si-title">「${svcSel.value}」でご相談いただけること</p><ul>${list.map(x => `<li>${x}</li>`).join('')}</ul>`;
+    svcInfo.hidden = false;
+  };
+  svcSel.addEventListener('change', showInfo);
+  const pickService = name => {
+    if (!name) return;
+    svcSel.value = name; svcSel.classList.remove('is-invalid');
+    showInfo();
+    svcSel.classList.remove('is-filled'); void svcSel.offsetWidth; svcSel.classList.add('is-filled');
+  };
+  document.querySelectorAll('[data-service]').forEach(a => a.addEventListener('click', () => {
+    if (a.dataset.method) setMethod(a.dataset.method);
+    pickService(a.dataset.service);
+  }));
+  document.querySelectorAll('[data-method]:not([data-service])').forEach(a => a.addEventListener('click', () => setMethod(a.dataset.method)));
+
+  // スマホ下部の固定ボタン：フォームが見えている間は隠す
+  const dock = document.getElementById('dock');
+  if (dock) {
+    const contactSec = document.getElementById('contact'), heroSec = document.querySelector('.hero');
+    let inContact = false, inHero = true;
+    const upd = () => dock.classList.toggle('is-hidden', inContact || inHero);
+    new IntersectionObserver(es => { inContact = es[0].isIntersecting; upd(); }, { threshold: 0.05 }).observe(contactSec);
+    new IntersectionObserver(es => { inHero = es[0].isIntersecting; upd(); }, { threshold: 0.35 }).observe(heroSec);
+  }
+
+  // 入力チェック
+  const setErr = (el, on) => el.classList.toggle('is-invalid', on);
+  const validate = () => {
+    let ok = true, first = null;
+    const mark = (el, bad) => { setErr(el, bad); if (bad) { ok = false; first = first || el; } };
+    ['#service', '#name'].forEach(q => mark($(q), !$(q).value.trim()));
+    const em = $('#email'); mark(em, !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim()));
+    const telDigits = toHalf($('#tel').value).replace(/\D/g, '');
+    mark($('#tel'), telDigits.length > 0 && !/^0\d{9,10}$/.test(telDigits));   // 電話番号は任意（入力時のみ形式チェック）
+    if ($('#message').required) mark($('#message'), !$('#message').value.trim());
+
+    if (form.classList.contains('is-visit')) {
+      ['#pref', '#city', '#banchi'].forEach(q => mark($(q), !$(q).value.trim()));
+      const seen = new Set();
+      form.querySelectorAll('.slot').forEach(sl => {
+        const d = sl.querySelector('input'), t = sl.querySelector('select'), er = sl.querySelector('.f-error');
+        let msg = '';
+        if (!d.value || !t.value) msg = '日付と時間を選択してください。';
+        else if (!isBizDay(d.value)) msg = '土日祝はご指定いただけません。平日をお選びください。';
+        else if (d.value < minDate) msg = '翌営業日以降の日付をお選びください。';
+        else if (seen.has(d.value + t.value)) msg = '他の希望と同じ日時です。別の日時をお選びください。';
+        seen.add(d.value + t.value);
+        er.textContent = msg;
+        setErr(d, !!msg && !(d.value && !t.value)); setErr(t, !t.value);
+        if (msg) { ok = false; first = first || d; }
+      });
+    }
+    const agreeOk = $('#agree').checked;
+    $('#agreeErr').textContent = agreeOk ? '' : '内容をご確認のうえ、チェックを入れてください。';
+    if (!agreeOk) { ok = false; first = first || $('#agree'); }
+    if (first) first.focus({ preventScroll: false });
+    return ok;
+  };
+  form.addEventListener('input', e => setErr(e.target, false));
+  form.addEventListener('change', e => { if (e.target.closest('.slot')) e.target.closest('.slot').querySelector('.f-error').textContent = ''; });
+
+  // 日付を「2026年10月6日（火）」形式に
+  const jpDate = str => { const d = new Date(str + 'T00:00:00'); return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日（${WEEK[d.getDay()]}）`; };
+
+  // メール本文の作成（info@jinkanri.com に届く内容）
+  const buildMail = () => {
+    const v = q => $(q).value.trim();
+    const visit = form.classList.contains('is-visit');
+    const methodLabel = visit ? '現地への訪問（調査・確認）を希望' : 'メールで相談';
+    const subject = `【${visit ? '現地訪問のご依頼' : 'メール相談'}｜${v('#service')}】${v('#name')} 様`;
+    const L = [];
+    L.push('━━━━━━━━━━━━━━━━━━━━━━');
+    L.push('　JIN株式会社 Webサイトからのお問い合わせ');
+    L.push('━━━━━━━━━━━━━━━━━━━━━━', '');
+    L.push(`■ お問い合わせ方法：${methodLabel}`);
+    L.push(`■ ご相談内容　　　：${v('#service')}`, '');
+    L.push('【お客様情報】');
+    L.push(`お名前　　　：${v('#name')} 様`);
+    L.push(`メール　　　：${v('#email')}`);
+    L.push(`電話番号　　：${v('#tel') ? toHalf(v('#tel')) + '（連絡が取れなかった際の連絡用）' : '（未記入）'}`, '');
+    if (visit) {
+      L.push('【訪問先（対象の住所）】');
+      L.push(`郵便番号　　：${v('#zip') ? '〒' + v('#zip') : '（未記入）'}`);
+      L.push(`住所　　　　：${v('#pref')}${v('#city')}${toHalf(v('#banchi'))}`);
+      L.push(`建物名・部屋：${v('#building') || '（なし）'}`);
+      L.push(`物件の種類　：${v('#ptype') || '（未選択）'}`, '');
+      L.push('【訪問希望日時】');
+      form.querySelectorAll('.slot').forEach((sl, i) => {
+        const d = sl.querySelector('input').value, t = sl.querySelector('select').value;
+        L.push(`第${i + 1}希望　　：${jpDate(d)}　${t.includes('いつでも') ? t : t + '〜'}`);
+      });
+      L.push(`立ち会い　　：${form.querySelector('input[name="attend"]:checked').value}`, '');
+    }
+    L.push('【ご相談内容の詳細】');
+    L.push(v('#message') || '（記入なし）', '');
+    L.push('──────────────────────');
+    L.push(`送信日時：${new Date().toLocaleString('ja-JP')}`);
+    return { subject, body: L.join('\n') };
+  };
+
+  const result = document.getElementById('result');
+  const showResult = html => { result.innerHTML = html; result.classList.add('is-show'); result.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+  const esc = t => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!validate()) return;
+    const { subject, body } = buildMail();
+    const visit = form.classList.contains('is-visit');
+
+    // A. 送信サービス経由で直接送信（FORM_ENDPOINT 設定時）
+    if (FORM_ENDPOINT) {
+      const btn = $('#submitBtn'); btn.disabled = true; btn.firstChild.textContent = '送信中…';
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ _subject: subject, email: $('#email').value.trim(), message: body })
+        });
+        if (!res.ok) throw new Error();
+        form.reset(); setMethod('mail');
+        showResult(`<strong>送信が完了しました</strong><p>${visit ? '訪問のご依頼' : 'ご相談'}ありがとうございます。受付時間（平日10:00〜15:00）内に、担当者よりメールにてご連絡いたします。</p>`);
+      } catch {
+        showResult(`<strong>送信できませんでした</strong><p>お手数ですが、時間をおいて再度お試しいただくか、<a href="mailto:${MAIL_TO}" style="border-bottom:1px solid">${MAIL_TO}</a> まで直接ご連絡ください。</p>`);
+      } finally { btn.disabled = false; setMethod(form.classList.contains('is-visit') ? 'visit' : 'mail'); }
+      return;
+    }
+
+    // B. メールアプリを起動（初期設定）
+    location.href = `mailto:${MAIL_TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    showResult(`<strong>メールアプリを起動しました</strong>
+      <p>入力内容がまとまったメールが作成されています。内容をご確認のうえ、<b>メールアプリから送信</b>してください。<br>
+      メールアプリが起動しない場合は、下の内容をコピーして <a href="mailto:${MAIL_TO}" style="border-bottom:1px solid">${MAIL_TO}</a> 宛にお送りください。</p>
+      <textarea readonly aria-label="送信内容">${esc('件名：' + subject + '\n\n' + body)}</textarea>
+      <button type="button" class="copy-btn">内容をコピーする</button>`);
+    result.querySelector('.copy-btn').addEventListener('click', ev => {
+      const ta = result.querySelector('textarea');
+      (navigator.clipboard ? navigator.clipboard.writeText(ta.value) : Promise.reject()).catch(() => { ta.select(); document.execCommand('copy'); });
+      ev.target.textContent = 'コピーしました';
+    });
+  });
+
+  // スクロールでふわっと表示
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+  }), { threshold: .1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
